@@ -2,6 +2,7 @@ package fr.univtours.polytech.bookshop.model;
 
 import java.io.Serializable;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 @Entity(name = "BOOK")
 public class BookBean implements Serializable {
 
+    @JsonbTransient
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

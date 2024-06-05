@@ -34,9 +34,9 @@ public class DetailsServlet extends HttpServlet {
         // On récupère ce que l'utilisateur à saisi.
         String search = request.getParameter("search");
         // On exécute la requête correspondante.
-        List<Doc> docs = this.detailsBusiness.getBookDetails(search);
+        //List<Doc> docs = this.detailsBusiness.getBookDetails(search);
         // On place le résultat de la recherche dans la requête.
-        request.setAttribute("DOCS", docs);
+       // request.setAttribute("DOCS", docs);
         // On redirige vers la JSP.
         request.getRequestDispatcher("books.jsp").forward(request, response);
     }
