@@ -1,5 +1,7 @@
 package fr.univtours.polytech.bookshop.dao;
 
+import java.util.List;
+
 import fr.univtours.polytech.bookshop.model.details.Doc;
 import fr.univtours.polytech.bookshop.model.details.WsDetailsResult;
 import jakarta.ejb.Stateless;
@@ -14,16 +16,18 @@ public class DetailsDaoImpl implements DetailsDao {
     private static final String OPEN_LIBRARY_API_URL = "https://openlibrary.org/search.json?q=";
 
     @Override
-    public WsDetailsResult searchBookDetails(String titleAndAuthor) {
+    public List<Doc> searchBookDetails(String titleAndAuthor) {
         try {
             // URL de l'API Open Library
             String apiUrl = OPEN_LIBRARY_API_URL + titleAndAuthor;
+            System.out.println("Titre et author :" +titleAndAuthor);
 
             // Instanciation du client
             Client client = ClientBuilder.newClient();
 
             // Appeler l'API Open Library
             WebTarget target = client.target(apiUrl);
+            System.out.println(target.getUri());
             WsDetailsResult result = target.request(MediaType.APPLICATION_JSON).get(WsDetailsResult.class);
 
             // Vérifier s'il y a des résultats
@@ -32,8 +36,7 @@ public class DetailsDaoImpl implements DetailsDao {
                 Doc firstDoc = result.getDocs().get(0);
 
                 // nouvel objet WsDetailsResult pour stocker les infos
-                WsDetailsResult detailsResult = new WsDetailsResult();
-
+                WsDetailsResult detailsResult = target.request(MediaType.APPLICATION_JSON).get(WsDetailsResult.class);
                 // Ajout des indos nécessaires
                 detailsResult.setRatingsCount(firstDoc.getRatings_average());
                 detailsResult.setRatingsAverage(firstDoc.getRatings_average());
@@ -44,7 +47,7 @@ public class DetailsDaoImpl implements DetailsDao {
                             + ".jpg";
                     detailsResult.setAuthorImageUrl(authorImageUrl);
                 }
-                return detailsResult;
+                return detailsResult.getDocs();
             }
         } catch (Exception e) {
             e.printStackTrace();

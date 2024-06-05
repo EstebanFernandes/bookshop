@@ -1,32 +1,37 @@
 package fr.univtours.polytech.bookshop.business;
 
 import java.io.IOException;
+import java.util.List;
 
 import fr.univtours.polytech.bookshop.dao.DetailsDao;
-import fr.univtours.polytech.bookshop.model.details.WsDetailsResult;
-import jakarta.ejb.EJB;
+import fr.univtours.polytech.bookshop.model.details.Doc;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 public class DetailsBusinessImpl implements DetailsBusiness {
 
-    @EJB
+    @Inject
     private DetailsDao detailsDao;
 
     /***
-     * getBookDetails qui prend en paramètre le titre et l'auteur du livre 
-     * et retourne les détails enrichis du livre sous forme d'objet WsDetailsResult.
+     * retourner les détails du livre avec le title et Author correspondant
      */
     @Override
-    public WsDetailsResult getBookDetails(String titleAndAuthor) {
+    public Doc getBookDetails(String titleAndAuthor) {
         try {
-            return (this.detailsDao.searchBookDetails(titleAndAuthor));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+            List<Doc> liste = detailsDao.searchBookDetails(titleAndAuthor);
+            for (Doc doc : liste) {
+                String concatenatedTitleAndAuthor = doc.getTitle() + doc.getAuthor_name();
+                if (concatenatedTitleAndAuthor.equals(titleAndAuthor)) {
+                    return doc;
+                }
+            }
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
+
     }
 
 }

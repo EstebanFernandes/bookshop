@@ -1,9 +1,10 @@
 package fr.univtours.polytech.bookshop.dao;
 
 import java.io.IOException;
+import java.util.List;
 
-import fr.univtours.polytech.bookshop.model.details.WsDetailsResult;
+import fr.univtours.polytech.bookshop.model.details.Doc;
 
 public interface DetailsDao {
-    WsDetailsResult searchBookDetails(String query) throws IOException, InterruptedException;
+    List<Doc> searchBookDetails(String query) throws IOException, InterruptedException;
 }

@@ -1,6 +1,5 @@
 package fr.univtours.polytech.bookshop.business;
 
-import fr.univtours.polytech.bookshop.dao.BookDAO;
 import fr.univtours.polytech.bookshop.dao.ExchangeRateDAO;
 import fr.univtours.polytech.bookshop.model.exchangerate.WsExchangeResult;
 import jakarta.inject.Inject;
