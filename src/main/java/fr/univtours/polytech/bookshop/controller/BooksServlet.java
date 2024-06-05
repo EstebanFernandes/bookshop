@@ -8,10 +8,7 @@ import fr.univtours.polytech.bookshop.business.BookBusiness;
 import fr.univtours.polytech.bookshop.business.DetailsBusiness;
 import fr.univtours.polytech.bookshop.business.ExchangeRateBusiness;
 import fr.univtours.polytech.bookshop.model.BookBean;
-<<<<<<< HEAD
 import fr.univtours.polytech.bookshop.model.details.Doc;
-=======
->>>>>>> e3ecb7c9992696161594ff9113bb3809e97a6c23
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
