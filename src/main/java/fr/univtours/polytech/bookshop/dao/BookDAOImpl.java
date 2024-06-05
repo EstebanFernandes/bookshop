@@ -7,6 +7,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 
 @Stateless
 public class BookDAOImpl implements BookDAO {
@@ -16,7 +17,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public BookBean getBook(Integer id) {
-        return em.getReference(BookBean.class, id);
+        return em.find(BookBean.class, id);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,8 +33,9 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
+    @Transactional
     public void updateBook(BookBean bookBean) {
-        em.persist(bookBean);
+        em.merge(bookBean);
     }
 
     @Override
