@@ -8,6 +8,10 @@ import fr.univtours.polytech.bookshop.business.BookBusiness;
 import fr.univtours.polytech.bookshop.business.DetailsBusiness;
 import fr.univtours.polytech.bookshop.business.ExchangeRateBusiness;
 import fr.univtours.polytech.bookshop.model.BookBean;
+<<<<<<< HEAD
+import fr.univtours.polytech.bookshop.model.details.Doc;
+=======
+>>>>>>> e3ecb7c9992696161594ff9113bb3809e97a6c23
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,8 +34,21 @@ public class BooksServlet extends HttpServlet {
             throws ServletException, IOException {
                 System.out.println("Bookservlet");
         List<BookBean> books = this.bookBusiness.getBooks();
+
         List<Float> newPrices = new ArrayList<Float>();
         //List<WsDetailsResult> details = this.detailsBusiness.getBookDetails(books.);
+        /*
+         *  for (BookBean book : books) {
+            Doc docs = this.detailsBusiness.getBookDetails(book.getTitle()+" "+book.getAuthor());
+            if(null != docs && docs.getAuthor_name()!=null && docs.getTitle()!=null){
+                book.setRatingsAverage(docs.getRatings_average());
+                book.setRatingsCount(docs.getRatings_count());
+                //book.setAuthorImageUrl();
+                System.err.println("Ratings" +book.getRatingsAverage());
+
+            }
+        }
+         */
         for (BookBean bookBean : books) {
             if(bookBean.getPrice()!=null)
                 newPrices.add(exchangeRateBusiness.getPriceByCode(bookBean.getCurrency(), bookBean.getPrice()));

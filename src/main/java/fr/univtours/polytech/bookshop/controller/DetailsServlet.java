@@ -2,7 +2,6 @@ package fr.univtours.polytech.bookshop.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.univtours.polytech.bookshop.business.DetailsBusiness;
 import fr.univtours.polytech.bookshop.model.details.Doc;
