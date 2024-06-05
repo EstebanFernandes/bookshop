@@ -1,6 +1,7 @@
 package fr.univtours.polytech.bookshop.dao;
 
 import fr.univtours.polytech.bookshop.model.exchangerate.WsExchangeResult;
+import jakarta.security.auth.message.MessagePolicy.Target;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
@@ -8,7 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 
 public class ExchangeRateDAOImpl implements ExchangeRateDAO{
 
-    private static String URI = " https://v6.exchangerate-api.com/v6/";
+    private static String URI = "https://v6.exchangerate-api.com";
     private static String API_KEY = "312c88d24f63dd19676e159b";
     @Override
     public WsExchangeResult getPriceByExchange(String code, float price) {
@@ -16,14 +17,16 @@ public class ExchangeRateDAOImpl implements ExchangeRateDAO{
         Client client = ClientBuilder.newClient();
 
         // On indique l'URL du Web Service.
-        WebTarget target = client.target(URI+API_KEY+"/");
+        WebTarget target = client.target(URI);
 
         // On indique le "end point" (on aurait aussi pu directement le mettre dans
         // l'URL).
         // C'est également avec cette méthode qu'on pourrait ajouter des "path
         // parameters" si besoin.
         Float f = price;
-        target = target.path("EUR/"+code+"/"+ f.toString());
+        target = target.path("v6").path(API_KEY).path("pair").path("EUR").path(code).path(f.toString());
+
+
         // On précise (lorsqu'il y en a) les "query parameters".
 
 

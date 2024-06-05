@@ -12,7 +12,7 @@ public class ExchangeRateBusinessImpl implements ExchangeRateBusiness{
     @Override
     public float getPriceByCode(String code, float price) {
         WsExchangeResult excR= exchangeRateDAO.getPriceByExchange(code, price);
-        return Float.parseFloat(excR.getResult());
+        return excR.getConversion_result().floatValue();
     }
 
 }
