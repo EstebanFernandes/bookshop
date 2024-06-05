@@ -5,7 +5,9 @@ import java.io.IOException;
 import fr.univtours.polytech.bookshop.dao.DetailsDao;
 import fr.univtours.polytech.bookshop.model.details.WsDetailsResult;
 import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 
+@Stateless
 public class DetailsBusinessImpl implements DetailsBusiness {
 
     @EJB
